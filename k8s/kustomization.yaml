@@ -7,5 +7,5 @@ resources:
 
 images:
 - name: goserver
-  newName: wesleywillians/gitopsfc
-  newTag: 55f36cb53adbe095908594b2a2a67c54317ce556
+  newName: jongcarvalho/gitopsfc
+  newTag: 5a066cc15f2177a7b622d2ed59c95211b43a61f4
