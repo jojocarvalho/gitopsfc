@@ -13,3 +13,27 @@
     context: . # Adicione o contexto se seu Dockerfile estiver na raiz
     push: true # Explicitamente diga para fazer o push
     tags: ${{ secrets.DOCKER_USERNAME }}/gitopsfc:${{ github.sha }}, ${{ secrets.DOCKER_USERNAME }}/gitopsfc:latest
+
+- name: Setup Kustomize 
+  uses: imranismail/setup-kustomize@v1
+  with:
+    kustomize-version: "3.6.1"
+
+- name: Update Kubernetes resources 
+  env:
+    DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  run: |
+    cd k8s
+    kustomize edit set image goserver=$DOCKER_USERNAME/gitopsfc:$GITHUB_SHA
+
+- name: Commit
+  run: |
+    git config --local user.email "action@github.com"
+    git config --local user.name "Github Action"
+    git commit -am "Bump docker version"
+
+- name: Push 
+  uses: ad-m/github-push-action@master
+  with:
+    github_token: ${{ secrets.TOKEN_GITHUB }}
+    repository: jojocarvalho/gitopsfc
