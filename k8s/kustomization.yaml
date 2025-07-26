@@ -8,4 +8,4 @@ resources:
 images:
 - name: goserver
   newName: jongcarvalho/gitopsfc
-  newTag: 5a066cc15f2177a7b622d2ed59c95211b43a61f4
+  newTag: 4f8df81498265ad82209dd58f60018629e5e3f61
